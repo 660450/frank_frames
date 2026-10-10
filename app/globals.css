@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-ink font-lato antialiased;
+  }
+
+  h1, h2, h3, h4, h5 {
+    @apply font-montserrat;
+  }
+
+  /* Reset default button styles */
+  button {
+    @apply cursor-pointer;
+  }
+}
+
+@layer utilities {
+  /* Initial state for animated elements — opacity-0 prevents flash */
+  .animate-fade-in,
+  .animate-slide-up,
+  .animate-fade-in-delay,
+  .animate-slide-up-delay {
+    opacity: 0;
+  }
+
+  /* Smooth image rendering */
+  .photo-grid img {
+    @apply select-none;
+  }
+
+  /* Hide scrollbar on lightbox body */
+  .no-scroll {
+    overflow: hidden;
+  }
+}
+
+/* Custom scrollbar — minimal */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+::-webkit-scrollbar-thumb {
+  background: #cccccc;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #999999;
+}
