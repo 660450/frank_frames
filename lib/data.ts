@@ -119,6 +119,7 @@ export const projects: Project[] = [
       { id: 'wp12', src: `${B}/frank-wp-pheasant/1200/800`,    alt: 'Fazant in het graan',          category: 'Wildlife' },
     ],
   },
+  
   {
     slug: 'stadsstilte',
     title: 'Stadsstilte',
@@ -142,6 +143,24 @@ export const projects: Project[] = [
       { id: 'cp10', src: `${B}/frank-cp-windmill/1200/800`,    alt: 'Windmolen Dordrecht',             category: 'Stadsfotografie' },
       { id: 'cp11', src: `${B}/frank-cp-rdam-blue/1200/800`,   alt: 'Waterfront Rotterdam — blauw uur',category: 'Stadsfotografie' },
       { id: 'cp12', src: `${B}/frank-cp-gouda-winter/1200/800`,alt: 'Straat Gouda — winterochtend',    category: 'Stadsfotografie' },
+    ],
+  },
+  {
+    slug: 'kanoen-rivier-en-licht',
+    title: 'Kanoën op rivier en licht',
+    description:
+      'Een rustige serie van kano-vakanties: water, reflecties en het zachte ochtendlicht langs de rivier.',
+    intro:
+      'Op een kalme ochtend op het water is alles langzamer. De kano glijdt over het oppervlak, het licht valt zacht over het water en de wereld lijkt even stil te staan. In deze serie zoek ik die rust en die beweging samen — het ritme van het water, de reflecties en de feel van een stille rivier in de vroege dag.',
+    heroImage: '/images/kano/Biesbosh_1.jpg',
+    date: 'Mei 2025',
+    location: 'Gouda, Nederland',
+    photos: [
+      { id: 'k01', src: '/images/kano/Biesbosh_1.jpg', alt: 'Kano in het Biesbosch', category: 'Kanoën' },
+      { id: 'k02', src: '/images/kano/Biesbosh_2.jpg', alt: 'Rivierlicht in het Biesbosch', category: 'Kanoën' },
+      { id: 'k03', src: '/images/kano/Biesbosh_3.jpg', alt: 'Rustig water in het Biesbosch', category: 'Kanoën' },
+      { id: 'k04', src: '/images/kano/weerribben-1.jpg', alt: 'Kano op het Weerribben', category: 'Kanoën' },
+      { id: 'k05', src: '/images/kano/weerribben-2.jpg', alt: 'Water en riet in het Weerribben', category: 'Kanoën' },
     ],
   },
 ]

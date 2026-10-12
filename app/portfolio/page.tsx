@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     'Wildlife, landschappen en stadsfotografie door Frank uit Gouda. Nikon D850/D810 met 500mm.',
 }
 
-const CATEGORIES: Category[] = ['Wildlife', 'Landschappen', 'Stadsfotografie', 'Kanoën']
+const CATEGORIES: Category[] = ['Wildlife', 'Landschappen', 'Stadsfotografie']
 
 export default function PortfolioPage() {
   return (
@@ -19,8 +19,7 @@ export default function PortfolioPage() {
         <p className="mb-2 font-lato text-[10px] tracking-[0.35em] uppercase text-mist">Werk</p>
         <h1 className="font-montserrat text-4xl font-light text-ink md:text-5xl">Portfolio</h1>
         <p className="mx-auto mt-4 max-w-md font-lato text-sm leading-relaxed text-mist">
-          Wildlife met 500mm &nbsp;·&nbsp; Landschappen uit Normandië, Luxemburg &amp; Nederland
-          &nbsp;·&nbsp; Stadsfotografie
+          Wildlifefoto&apos;s, landschappen en stadsbeelden — met projecten als aparte verhalen in de serie&apos;s.
         </p>
       </div>
 
