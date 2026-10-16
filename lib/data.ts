@@ -20,9 +20,20 @@ export interface Project {
 
 const B = 'https://picsum.photos/seed'
 
+const shufflePhotos = <T,>(items: T[]): T[] => {
+  const shuffled = [...items]
+
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1))
+    ;[shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]]
+  }
+
+  return shuffled
+}
+
 // ─── Portfolio photos ─────────────────────────────────────────────────────────
 
-export const portfolioPhotos: Photo[] = [
+export const portfolioPhotos: Photo[] = shufflePhotos([ 
   // Wildlife — 500mm
   { id: 'w01', src: `${B}/frank-heron-500mm/1200/800`,     alt: 'Reiger in vlucht — 500mm',             category: 'Wildlife' },
   { id: 'w02', src: `${B}/frank-eagle-water/1200/800`,     alt: 'Zeearend boven het water',              category: 'Wildlife' },
@@ -64,11 +75,11 @@ export const portfolioPhotos: Photo[] = [
   { id: 's10', src: `${B}/frank-rotterdam-harbor/1200/800`,alt: 'Havenzicht Rotterdam',                  category: 'Stadsfotografie' },
   { id: 's11', src: `${B}/frank-gouda-kaas/1200/800`,      alt: 'Kaasmarkt Gouda',                       category: 'Stadsfotografie' },
   { id: 's12', src: `${B}/frank-dordrecht-water/1200/800`, alt: 'Waterfront Dordrecht',                  category: 'Stadsfotografie' },
-]
+])
 
 // ─── Projects ─────────────────────────────────────────────────────────────────
 
-export const projects: Project[] = [
+const rawProjects: Project[] = [
   {
     slug: 'normandie-in-ochtendlicht',
     title: 'Normandië in ochtendlicht',
@@ -152,17 +163,35 @@ export const projects: Project[] = [
       'Een rustige serie van kano-vakanties: water, reflecties en het zachte ochtendlicht langs de rivier.',
     intro:
       'Op een kalme ochtend op het water is alles langzamer. De kano glijdt over het oppervlak, het licht valt zacht over het water en de wereld lijkt even stil te staan. In deze serie zoek ik die rust en die beweging samen — het ritme van het water, de reflecties en de feel van een stille rivier in de vroege dag.',
-    heroImage: '/images/kano/Biesbosh_1.jpg',
+    heroImage: '/images/kano/2026-10-%20kano01.jpg',
     date: 'Mei 2025',
     location: 'Gouda, Nederland',
     photos: [
-      { id: 'k01', src: '/images/kano/Biesbosh_1.jpg', alt: 'Kano in het Biesbosch', category: 'Kanoën' },
-      { id: 'k02', src: '/images/kano/Biesbosh_2.jpg', alt: 'Rivierlicht in het Biesbosch', category: 'Kanoën' },
-      { id: 'k03', src: '/images/kano/Biesbosh_3.jpg', alt: 'Rustig water in het Biesbosch', category: 'Kanoën' },
-      { id: 'k04', src: '/images/kano/weerribben-1.jpg', alt: 'Kano op het Weerribben', category: 'Kanoën' },
-      { id: 'k05', src: '/images/kano/weerribben-2.jpg', alt: 'Water en riet in het Weerribben', category: 'Kanoën' },
+      { id: 'k01', src: '/images/kano/2026-10-%20kano01.jpg', alt: 'Kano 01', category: 'Kanoën' },
+      { id: 'k02', src: '/images/kano/2026-10-%20kano02.jpg', alt: 'Kano 02', category: 'Kanoën' },
+      { id: 'k03', src: '/images/kano/2026-10-%20kano03.jpg', alt: 'Kano 03', category: 'Kanoën' },
+      { id: 'k04', src: '/images/kano/2026-10-%20kano04.jpg', alt: 'Kano 04', category: 'Kanoën' },
+      { id: 'k05', src: '/images/kano/2026-10-%20kano05.jpg', alt: 'Kano 05', category: 'Kanoën' },
+      { id: 'k06', src: '/images/kano/2026-10-%20kano06.jpg', alt: 'Kano 06', category: 'Kanoën' },
+      { id: 'k07', src: '/images/kano/2026-10-%20kano07.jpg', alt: 'Kano 07', category: 'Kanoën' },
+      { id: 'k08', src: '/images/kano/2026-10-%20kano08.jpg', alt: 'Kano 08', category: 'Kanoën' },
+      { id: 'k09', src: '/images/kano/2026-10-%20kano09.jpg', alt: 'Kano 09', category: 'Kanoën' },
+      { id: 'k10', src: '/images/kano/2026-10-%20kano10.jpg', alt: 'Kano 10', category: 'Kanoën' },
+      { id: 'k11', src: '/images/kano/2026-10-%20kano11.jpg', alt: 'Kano 11', category: 'Kanoën' },
+      { id: 'k12', src: '/images/kano/2026-10-%20kano12.jpg', alt: 'Kano 12', category: 'Kanoën' },
+      { id: 'k13', src: '/images/kano/2026-10-%20kano13.jpg', alt: 'Kano 13', category: 'Kanoën' },
+      { id: 'k14', src: '/images/kano/2026-10-%20kano14.jpg', alt: 'Kano 14', category: 'Kanoën' },
+      { id: 'k15', src: '/images/kano/2026-10-%20kano15.jpg', alt: 'Kano 15', category: 'Kanoën' },
+      { id: 'k16', src: '/images/kano/2026-10-%20kano16.jpg', alt: 'Kano 16', category: 'Kanoën' },
+      { id: 'k17', src: '/images/kano/2026-10-%20kano17.jpg', alt: 'Kano 17', category: 'Kanoën' },
+      { id: 'k18', src: '/images/kano/2026-10-%20kano18.jpg', alt: 'Kano 18', category: 'Kanoën' },
     ],
   },
 ]
+
+export const projects: Project[] = rawProjects.map(project => ({
+  ...project,
+  photos: shufflePhotos(project.photos),
+}))
 
 export const featuredPhotos = portfolioPhotos.slice(0, 6)
