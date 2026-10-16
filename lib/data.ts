@@ -158,7 +158,7 @@ const rawProjects: Project[] = [
   },
   {
     slug: 'kanoen-rivier-en-licht',
-    title: 'Kanoën op rivier en licht',
+    title: 'Kanoën in de schoonheid van de natuur',
     description:
       'Een rustige serie van kano-vakanties: water, reflecties en het zachte ochtendlicht langs de rivier.',
     intro:
