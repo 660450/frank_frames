@@ -32,7 +32,7 @@ const projectTitleMap: Record<string, Partial<Project>> = {
     title: 'Kanoën in de schoonheid van de natuur',
     description: 'Een rustige serie van kano-vakanties: water, reflecties en het zachte ochtendlicht langs de rivier.',
     intro:
-      'Op een kalme ochtend op het water is alles langzamer. De kano glijdt over het oppervlak, het licht valt zacht over het water en de wereld lijkt even stil te staan. In deze serie zoek ik die rust en die beweging samen — het ritme van het water, de reflecties en de feel van een stille rivier in de vroege dag.',
+      'Aan het einde van de dag, wanneer de zon ondergaat, lijkt alles op het water langzamer te gaan. De kano glijdt geruisloos over het oppervlak, terwijl het laatste zonlicht zacht over het water valt. Even lijkt de wereld stil te staan. In deze serie zoek ik die combinatie van rust en beweging: het ritme van het water, de weerspiegelingen en de sfeer van een stille rivier of plas in de avondschemering.',
     location: 'Gouda, Nederland',
   },
   food: {
@@ -49,9 +49,9 @@ const getPhotoCategory = (folderName: string, root: 'portfolio' | 'projecten'): 
   const value = folderName.toLowerCase()
 
   if (root === 'projecten' && value.includes('kano')) return 'Kanoën'
-  if (value.includes('gouda') || value.includes('rotterdam') || value.includes('steden')) return 'Stadsfotografie'
-  if (value.includes('natuur') || value.includes('landschap') || value.includes('wadden') || value.includes('food')) return 'Landschappen'
-  if (value.includes('kermis')) return 'Stadsfotografie'
+  if (value.includes('gouda bij nacht') || value.includes('Rotterdam') || value.includes('Steden')) return 'Stadsfotografie'
+  if (value.includes('natuur') || value.includes('landschap') || value.includes('Wadden eilanden') || value.includes('food')) return 'Landschappen'
+  if (value.includes('Kermis')) return 'Stadsfotografie'
 
   return 'Landschappen'
 }

@@ -32,7 +32,7 @@ export default function PortfolioGroupPage({ params }: Props) {
         <Link
           href="/portfolio"
           aria-label="Terug naar portfolio"
-          className="inline-flex items-center gap-2 border border-rule bg-paper px-3 py-2 font-lato text-[10px] tracking-[0.3em] uppercase text-ink transition-colors hover:border-ink/40 hover:text-mist"
+          className="fixed left-6 top-6 z-50 inline-flex items-center gap-2 border border-rule bg-paper/95 px-3 py-2 font-lato text-[10px] tracking-[0.3em] uppercase text-ink shadow-sm backdrop-blur-sm transition-colors hover:border-ink/40 hover:text-mist"
         >
           <span className="text-base leading-none">←</span>
           <span>Terug</span>
