@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import { projects } from '@/lib/data'
-import ProjectCard from '@/components/ProjectCard'
+import Gallery from '@/components/Gallery'
+import { projectGroups } from '@/lib/data'
 
 export const metadata: Metadata = {
   title: 'Projecten',
@@ -11,32 +11,27 @@ export const metadata: Metadata = {
 export default function ProjectenPage() {
   return (
     <>
-      {/* Page header */}
       <div className="px-6 pb-16 pt-36 text-center">
         <p className="mb-2 font-lato text-[10px] tracking-[0.35em] uppercase text-mist">Verhalen</p>
         <h1 className="font-montserrat text-4xl font-light text-ink md:text-5xl">Projecten</h1>
         <p className="mx-auto mt-4 max-w-md font-lato text-sm leading-relaxed text-mist">
-          Diepere series rondom een thema, locatie of techniek. Elk project is een
-          chronologisch opgebouwde reis.
+          Diepere series rondom een thema, locatie of techniek. Elke map wordt hier als apart project getoond.
         </p>
       </div>
 
-      {/* Projects grid */}
-      <div className="mx-auto max-w-7xl px-6 pb-28">
-        <div className="grid grid-cols-1 gap-14 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map(project => (
-            <ProjectCard
-              key={project.slug}
-              slug={project.slug}
-              title={project.title}
-              description={project.description}
-              heroImage={project.heroImage}
-              date={project.date}
-              location={project.location}
-              photoCount={project.photos.length}
-            />
-          ))}
-        </div>
+      <div className="mx-auto max-w-7xl space-y-16 px-6 pb-28">
+        {projectGroups.map(group => (
+          <section key={group.slug} className="space-y-6">
+            <div className="flex items-end justify-between gap-4 border-b border-rule pb-3">
+              <h2 className="font-montserrat text-2xl font-light text-ink">{group.title}</h2>
+              <span className="font-lato text-[10px] tracking-[0.25em] uppercase text-mist">
+                {group.photos.length} foto&apos;s
+              </span>
+            </div>
+
+            <Gallery photos={group.photos} columns={3} />
+          </section>
+        ))}
       </div>
     </>
   )

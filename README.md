@@ -53,6 +53,79 @@ Open [http://localhost:3000](http://localhost:3000) in je browser.
 
 ---
 
+## Foto's toevoegen en organiseren
+
+De site leest foto’s op basis van de mapstructuur in `public/images/` in plaats van een handmatige lijst in `lib/data.ts`.
+
+Gebruik daarom deze structuur:
+
+```text
+public/
+├── images/
+│   ├── portfolio/
+│   │   ├── Gouda/
+│   │   │   ├── 01.jpg
+│   │   │   └── 02.jpg
+│   │   └── Landschap en natuur/
+│   │       ├── 01.jpg
+│   │       └── 02.jpg
+│   └── projecten/
+│       ├── kanoen-rivier-en-licht/
+│       │   ├── kano01.jpg
+│       │   └── kano02.jpg
+│       └── food/
+│           ├── 01.jpg
+│           └── 02.jpg
+```
+
+- `public/images/portfolio/...` = foto’s voor de portfolio-galerij
+- `public/images/projecten/...` = foto’s voor projectpagina’s
+- elk project/map krijgt automatisch een eigen kopje op de pagina
+- laat geen losse foto’s in de hoofdmap staan; zet ze per serie in een eigen map
+
+Als je een nieuwe serie wilt toevoegen:
+
+1. maak een nieuwe folder in `public/images/portfolio/` of `public/images/projecten/`
+2. plaats de foto’s daar in
+3. herstart de dev-server als nodig
+4. de pagina wordt automatisch opgebouwd vanuit die map
+
+Belangrijk: geen spaties in bestandsnamen, of gebruik een veilige naam zoals `kano01.jpg`.
+
+---
+
+## Als de app ineens een Next.js cache-fout geeft
+
+Als je in de browser een fout ziet zoals:
+
+```text
+Error: Cannot find module './249.js'
+```
+
+of een vergelijkbare `webpack-runtime`-fout, dan is dit meestal een oude dev-cache, niet een probleem met je foto’s.
+
+Doe dit dan:
+
+```bash
+# 1. stop de dev-server op port 3000
+lsof -ti :3000 | xargs kill
+
+# 2. wis de cache
+rm -rf .next
+
+# 3. start opnieuw
+npm run dev
+```
+
+Vervolgens even een harde refresh in de browser:
+
+- Windows/Linux: `Ctrl + Shift + R`
+- Mac: `Cmd + Shift + R`
+
+Als je een Next.js-devserver nog steeds ziet hangen, check dan of er nog een `node next dev`-proces draait en stop dat ook.
+
+---
+
 ## Eigen foto's toevoegen
 
 Vervang de picsum.photos-URLs in `lib/data.ts` door je eigen foto's:
