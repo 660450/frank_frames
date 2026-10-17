@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import Gallery from '@/components/Gallery'
 import { portfolioGroups } from '@/lib/data'
@@ -28,14 +29,14 @@ export default function PortfolioGroupPage({ params }: Props) {
   return (
     <>
       <div className="mx-auto max-w-7xl px-6 pt-8 md:pt-10">
-        <a
+        <Link
           href="/portfolio"
           aria-label="Terug naar portfolio"
           className="inline-flex items-center gap-2 border border-rule bg-paper px-3 py-2 font-lato text-[10px] tracking-[0.3em] uppercase text-ink transition-colors hover:border-ink/40 hover:text-mist"
         >
           <span className="text-base leading-none">←</span>
           <span>Terug</span>
-        </a>
+        </Link>
       </div>
 
       <div className="px-6 pb-12 pt-6 text-center">

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import { portfolioGroups } from '@/lib/data'
 
 export const metadata: Metadata = {
@@ -25,7 +26,7 @@ export default function PortfolioPage() {
             const coverPhoto = group.photos[0]
 
             return (
-              <a
+              <Link
                 key={group.slug}
                 href={`/portfolio/${group.slug}`}
                 className="group block overflow-hidden border border-rule bg-paper transition-all duration-300 hover:-translate-y-1 hover:border-ink/30"
@@ -50,7 +51,7 @@ export default function PortfolioPage() {
                     <h2 className="mt-2 font-montserrat text-2xl font-light text-white">{group.title}</h2>
                   </div>
                 </div>
-              </a>
+              </Link>
             )
           })}
         </div>
