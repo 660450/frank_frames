@@ -33,13 +33,13 @@ const projectTitleMap: Record<string, Partial<Project>> = {
     description: 'Een rustige serie van kano-vakanties: water, reflecties en het zachte ochtendlicht langs de rivier.',
     intro:
       'Op een kalme ochtend op het water is alles langzamer. De kano glijdt over het oppervlak, het licht valt zacht over het water en de wereld lijkt even stil te staan. In deze serie zoek ik die rust en die beweging samen — het ritme van het water, de reflecties en de feel van een stille rivier in de vroege dag.',
-    date: 'Mei 2025',
     location: 'Gouda, Nederland',
   },
   food: {
-    title: 'Food',
+    title: 'Food & Gastronomie',
     description: 'Eten, texturen en detail in een warme, tastbare sfeer.',
-    intro: 'Een serie over smaak, licht en compositie in de wereld van eten en detail.',
+    intro:
+      'De aanleiding voor het maken van deze website was een verzoek van een kennis om foto\'s te maken van verschillende gerechten. Deze foto\'s zouden worden opgenomen in een boek waarin diverse restaurants uit Gouda werden beschreven. Bij elk restaurant werd een gerecht gepresenteerd en toegelicht. De opbrengst van het boek ging naar een goed doel. Als dank zouden mijn naam en website in het boek worden vermeld. Op dat moment bestond deze website nog niet, maar inmiddels wel. Op deze pagina vindt u een selectie van de gerechten die ik voor dit project heb gefotografeerd.',
     date: '2025',
     location: 'Nederland',
   },
