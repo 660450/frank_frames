@@ -27,6 +27,17 @@ export default function ProjectPage({ params }: Props) {
 
   return (
     <>
+      <div className="mx-auto max-w-7xl px-6 pt-8 md:pt-10">
+        <a
+          href="/projecten"
+          aria-label="Terug naar projecten"
+          className="inline-flex items-center gap-2 border border-rule bg-paper px-3 py-2 font-lato text-[10px] tracking-[0.3em] uppercase text-ink transition-colors hover:border-ink/40 hover:text-mist"
+        >
+          <span className="text-base leading-none">←</span>
+          <span>Terug</span>
+        </a>
+      </div>
+
       {/* Hero */}
       <Hero
         imageSrc={project.heroImage}
@@ -59,16 +70,6 @@ export default function ProjectPage({ params }: Props) {
       <section className="mx-auto max-w-7xl px-6 py-16 pb-28">
         <Gallery photos={project.photos} columns={3} />
       </section>
-
-      {/* Back link */}
-      <div className="border-t border-rule px-6 py-10 text-center">
-        <a
-          href="/projecten"
-          className="font-lato text-[10px] tracking-[0.3em] uppercase text-mist transition-colors hover:text-ink"
-        >
-          ← Terug naar projecten
-        </a>
-      </div>
     </>
   )
 }
