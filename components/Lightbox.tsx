@@ -49,65 +49,62 @@ export default function Lightbox({ photos, initialIndex, onClose }: LightboxProp
       aria-modal="true"
       aria-label="Foto weergave"
       className="fixed inset-0 z-[200] flex items-center justify-center bg-black/96"
-      onClick={onClose}
+      onContextMenu={e => e.preventDefault()}
     >
       {/* Close */}
       <button
         onClick={onClose}
         aria-label="Sluiten (Esc)"
-        className="absolute right-5 top-5 z-10 p-2 text-white/50 transition-colors hover:text-white"
+        className="absolute right-4 top-4 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-black/25 text-lg text-white/80 transition hover:border-white/60 hover:bg-black/40 hover:text-white"
       >
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true">
-          <path d="M2 2l18 18M20 2L2 20" />
-        </svg>
+        ×
       </button>
 
       {/* Counter */}
-      <span className="absolute left-5 top-5 font-lato text-xs text-white/40">
+      <span className="absolute left-4 top-4 z-20 font-lato text-[11px] tracking-[0.2em] text-white/45 uppercase">
         {index + 1} / {photos.length}
       </span>
 
       {/* Prev arrow */}
       <button
-        onClick={e => { e.stopPropagation(); prev() }}
+        onClick={prev}
         aria-label="Vorige foto"
-        className="absolute left-3 z-10 p-4 text-white/40 transition-colors hover:text-white"
+        className="absolute left-3 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-black/20 text-white/60 transition hover:border-white/35 hover:bg-black/35 hover:text-white md:left-6"
       >
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
           <path d="M15 4l-8 8 8 8" />
         </svg>
       </button>
 
       {/* Image wrapper */}
-      <div
-        className="relative mx-16 w-full max-w-5xl"
-        onClick={e => e.stopPropagation()}
-      >
-        <div className="relative aspect-[3/2] w-full">
+      <div className="relative mx-14 w-full max-w-5xl md:mx-20" onClick={e => e.stopPropagation()}>
+        <div className="relative aspect-[3/2] w-full overflow-hidden rounded-sm bg-black/40">
           <Image
             key={photo.id}
             src={photo.src}
             alt={photo.alt}
             fill
-            className="object-contain"
+            className="select-none object-contain"
             sizes="(max-width: 1280px) 90vw, 1200px"
             unoptimized
+            draggable={false}
+            onContextMenu={e => e.preventDefault()}
           />
         </div>
 
         {/* Caption */}
-        <p className="mt-3 text-center font-lato text-xs text-white/35">
+        <p className="mt-3 text-center font-lato text-[11px] uppercase tracking-[0.18em] text-white/45">
           {photo.alt}
         </p>
       </div>
 
       {/* Next arrow */}
       <button
-        onClick={e => { e.stopPropagation(); next() }}
+        onClick={next}
         aria-label="Volgende foto"
-        className="absolute right-3 z-10 p-4 text-white/40 transition-colors hover:text-white"
+        className="absolute right-3 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-black/20 text-white/60 transition hover:border-white/35 hover:bg-black/35 hover:text-white md:right-6"
       >
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
           <path d="M9 4l8 8-8 8" />
         </svg>
       </button>

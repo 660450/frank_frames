@@ -63,17 +63,24 @@ export default function Gallery({
             onClick={() => setLightboxIndex(i)}
             aria-label={`Foto openen: ${photo.alt}`}
             className="group relative aspect-[4/3] overflow-hidden bg-paper"
+            onContextMenu={e => e.preventDefault()}
+            draggable={false}
           >
             <Image
               src={photo.src}
               alt={photo.alt}
               fill
-              className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] select-none"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               unoptimized
+              draggable={false}
+              onContextMenu={e => e.preventDefault()}
             />
             {/* Hover vignette */}
             <div className="absolute inset-0 bg-black/0 transition-all duration-300 group-hover:bg-black/18" />
+            <div className="pointer-events-none absolute bottom-2 right-2 rounded-full border border-white/25 bg-black/20 px-2 py-1 font-lato text-[9px] uppercase tracking-[0.2em] text-white/75 backdrop-blur-[2px]">
+              Frank Fotografie
+            </div>
           </button>
         ))}
       </div>
