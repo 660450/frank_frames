@@ -70,7 +70,8 @@ export default function Gallery({
               src={photo.src}
               alt={photo.alt}
               fill
-              className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] select-none"
+              className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] select-none"
+              style={photo.aspectRatio < 1 ? { transform: 'scale(0.9)' } : undefined}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               unoptimized
               draggable={false}

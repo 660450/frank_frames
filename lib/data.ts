@@ -8,6 +8,7 @@ export interface Photo {
   src: string
   alt: string
   category: Category
+  aspectRatio: number
 }
 
 export interface PhotoGroup {
@@ -76,6 +77,41 @@ const createSlug = (value: string) => {
     .replace(/^-|-$/g, '')
 }
 
+const getImageDimensions = (filePath: string): { width: number; height: number } => {
+  const buffer = fs.readFileSync(filePath)
+  const signature = buffer.subarray(0, 8)
+
+  if (signature.toString('hex', 0, 8) === '89504e470d0a1a0a') {
+    const width = buffer.readUInt32BE(0x08)
+    const height = buffer.readUInt32BE(0x0c)
+    return { width, height }
+  }
+
+  if (buffer[0] === 0xff && buffer[1] === 0xd8) {
+    let offset = 2
+    while (offset < buffer.length) {
+      if (buffer[offset] !== 0xff) {
+        offset += 1
+        continue
+      }
+
+      const marker = buffer[offset + 1]
+      if (marker === 0xda) break
+
+      if (marker >= 0xc0 && marker <= 0xcf && marker !== 0xc4 && marker !== 0xc8 && marker !== 0xcc) {
+        const blockLength = buffer.readUInt16BE(offset + 2)
+        const height = buffer.readUInt16BE(offset + 5)
+        const width = buffer.readUInt16BE(offset + 7)
+        return { width, height }
+      }
+
+      offset += 2 + buffer.readUInt16BE(offset + 2)
+    }
+  }
+
+  return { width: 4, height: 3 }
+}
+
 const listFolderPhotos = (root: 'portfolio' | 'projecten', folderName: string): Photo[] => {
   const folderPath = path.join(process.cwd(), 'public', 'images', root, folderName)
   if (!fs.existsSync(folderPath)) return []
@@ -89,12 +125,16 @@ const listFolderPhotos = (root: 'portfolio' | 'projecten', folderName: string): 
     const safeFolder = encodeURIComponent(folderName)
     const safeFile = encodeURIComponent(file)
     const title = createFolderTitle(folderName)
+    const fullPath = path.join(folderPath, file)
+    const { width, height } = getImageDimensions(fullPath)
+    const aspectRatio = width && height ? width / height : 4 / 3
 
     return {
       id: `${root}-${createSlug(folderName)}-${index + 1}`,
       src: `/images/${root}/${safeFolder}/${safeFile}`,
       alt: `${title} ${index + 1}`,
       category: getPhotoCategory(folderName, root),
+      aspectRatio,
     }
   })
 }
