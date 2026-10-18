@@ -56,7 +56,7 @@ export default function Gallery({
       )}
 
       {/* Photo grid */}
-      <div className={`grid gap-[3px] ${gridCols}`}>
+      <div className={`grid gap-[2px] ${gridCols}`}>
         {visible.map((photo, i) => (
           <button
             key={photo.id}
@@ -78,8 +78,8 @@ export default function Gallery({
               onContextMenu={e => e.preventDefault()}
             />
             {/* Hover vignette */}
-            <div className="absolute inset-0 bg-black/0 transition-all duration-300 group-hover:bg-black/18" />
-            <div className="pointer-events-none absolute bottom-2 right-2 rounded-full border border-white/25 bg-black/20 px-2 py-1 font-lato text-[9px] uppercase tracking-[0.2em] text-white/75 backdrop-blur-[2px]">
+            <div className="absolute inset-0 bg-black/0 transition-all duration-300 group-hover:bg-black/10" />
+            <div className="pointer-events-none absolute bottom-3 right-3 rounded-full border border-white/20 bg-black/20 px-2 py-1 font-lato text-[8px] uppercase tracking-[0.22em] text-white/70 backdrop-blur-[1px] shadow-[0_1px_8px_rgba(0,0,0,0.15)]">
               Frank Fotografie
             </div>
           </button>
