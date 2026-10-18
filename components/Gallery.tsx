@@ -31,8 +31,8 @@ export default function Gallery({
 
   const gridCols =
     columns === 2
-      ? 'grid-cols-1 sm:grid-cols-2'
-      : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+      ? 'grid-cols-1 sm:grid-cols-12'
+      : 'grid-cols-1 sm:grid-cols-12'
 
   return (
     <>
@@ -59,13 +59,21 @@ export default function Gallery({
       <div className={`grid gap-[2px] ${gridCols}`}>
         {visible.map((photo, i) => {
           const isPortrait = photo.aspectRatio < 1
+          const spanClass = isPortrait
+            ? columns === 2
+              ? 'sm:col-span-4'
+              : 'sm:col-span-4 lg:col-span-3'
+            : columns === 2
+              ? 'sm:col-span-8'
+              : 'sm:col-span-8 lg:col-span-6'
+          const aspectClass = isPortrait ? 'aspect-[3/4]' : 'aspect-[4/3]'
 
           return (
             <button
               key={photo.id}
               onClick={() => setLightboxIndex(i)}
               aria-label={`Foto openen: ${photo.alt}`}
-              className={`group relative overflow-hidden bg-paper ${isPortrait ? 'aspect-[3/4]' : 'aspect-[4/3]'}`}
+              className={`group relative col-span-12 overflow-hidden bg-paper ${spanClass} ${aspectClass}`}
               onContextMenu={e => e.preventDefault()}
               draggable={false}
             >
