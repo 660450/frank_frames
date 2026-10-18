@@ -57,33 +57,39 @@ export default function Gallery({
 
       {/* Photo grid */}
       <div className={`grid gap-[2px] ${gridCols}`}>
-        {visible.map((photo, i) => (
-          <button
-            key={photo.id}
-            onClick={() => setLightboxIndex(i)}
-            aria-label={`Foto openen: ${photo.alt}`}
-            className="group relative aspect-[4/3] overflow-hidden bg-paper"
-            onContextMenu={e => e.preventDefault()}
-            draggable={false}
-          >
-            <Image
-              src={photo.src}
-              alt={photo.alt}
-              fill
-              className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04] select-none"
-              style={photo.aspectRatio < 1 ? { transform: 'scale(0.9)' } : undefined}
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              unoptimized
-              draggable={false}
+        {visible.map((photo, i) => {
+          const isPortrait = photo.aspectRatio < 1
+
+          return (
+            <button
+              key={photo.id}
+              onClick={() => setLightboxIndex(i)}
+              aria-label={`Foto openen: ${photo.alt}`}
+              className={`group relative overflow-hidden bg-paper ${isPortrait ? 'aspect-[3/4]' : 'aspect-[4/3]'}`}
               onContextMenu={e => e.preventDefault()}
-            />
-            {/* Hover vignette */}
-            <div className="absolute inset-0 bg-black/0 transition-all duration-300 group-hover:bg-black/10" />
-            <div className="pointer-events-none absolute bottom-3 right-3 rounded-full border border-white/20 bg-black/20 px-2 py-1 font-lato text-[8px] uppercase tracking-[0.22em] text-white/70 backdrop-blur-[1px] shadow-[0_1px_8px_rgba(0,0,0,0.15)]">
-              Frank Fotografie
-            </div>
-          </button>
-        ))}
+              draggable={false}
+            >
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                fill
+                className={`h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.04] select-none ${
+                  isPortrait ? 'object-contain scale-[0.96]' : 'object-cover'
+                }`}
+                style={isPortrait ? { objectPosition: 'center center' } : undefined}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                unoptimized
+                draggable={false}
+                onContextMenu={e => e.preventDefault()}
+              />
+              {/* Hover vignette */}
+              <div className="absolute inset-0 bg-black/0 transition-all duration-300 group-hover:bg-black/10" />
+              <div className="pointer-events-none absolute bottom-3 right-3 rounded-full border border-white/20 bg-black/20 px-2 py-1 font-lato text-[8px] uppercase tracking-[0.22em] text-white/70 backdrop-blur-[1px] shadow-[0_1px_8px_rgba(0,0,0,0.15)]">
+                Frank Fotografie
+              </div>
+            </button>
+          )
+        })}
       </div>
 
       {/* Lightbox */}

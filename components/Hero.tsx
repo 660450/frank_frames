@@ -36,7 +36,8 @@ export default function Hero({
         alt={imageAlt}
         fill
         priority
-        className="object-cover"
+        className="scale-[0.96] object-cover"
+        style={{ objectPosition: '50% 50%' }}
         sizes="100vw"
         unoptimized
       />

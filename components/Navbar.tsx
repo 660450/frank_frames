@@ -53,8 +53,12 @@ export default function Navbar() {
             <Link
               key={href}
               href={href}
-              className={`font-lato text-[11px] tracking-[0.2em] uppercase transition-colors duration-200 ${
-                pathname.startsWith(href) ? 'text-accent' : transparent ? 'text-white/85 hover:text-white' : 'text-ink hover:text-accent'
+              className={`font-lato text-[12px] font-semibold tracking-[0.24em] uppercase transition-all duration-200 md:text-[13px] ${
+                pathname.startsWith(href)
+                  ? 'text-accent'
+                  : transparent
+                    ? 'text-white/90 hover:text-white'
+                    : 'text-ink hover:text-accent'
               }`}
             >
               {label}
@@ -100,7 +104,7 @@ export default function Navbar() {
             <Link
               key={href}
               href={href}
-              className={`font-lato text-[11px] tracking-[0.2em] uppercase py-2 transition-colors ${
+              className={`font-lato text-[12px] font-semibold tracking-[0.24em] uppercase py-2 transition-colors ${
                 pathname.startsWith(href) ? 'text-accent' : 'text-ink hover:text-accent'
               }`}
             >
