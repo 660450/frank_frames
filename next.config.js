@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-const repoName = 'frank-frames'
+const repoName = 'frank_frames'
 
 const nextConfig = {
   output: 'export',
