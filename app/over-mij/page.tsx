@@ -10,68 +10,73 @@ export const metadata: Metadata = {
 const GEAR = [
   { name: 'Nikon D850',        role: 'Primaire body',       detail: '45,7 MP · Fullframe' },
   { name: 'Nikon D810',        role: 'Tweede body',         detail: '36,3 MP · Fullframe' },
-  { name: 'Nikkor 500mm f/5.6 PF', role: 'Wildlife & vogels',  detail: 'PF-element · VR' },
+  { name: 'Nikkor prime lenzen', role: 'Momenten onderweg',  detail: '2.8 · HDR' },
   { name: 'Nikkor 24–70mm f/2.8', role: 'Landschappen & stad', detail: 'AF-S · VR' },
   { name: 'Carbon statief',    role: 'Stabilisatie',        detail: 'Gitzo-serie' },
   { name: 'ND-filters',        role: 'Lange sluitertijden', detail: 'ND4 / ND8 / ND64' },
 ]
 
 const CATEGORIES = [
-  { label: 'Wildlife',         detail: 'Vogels, zoogdieren & macro met 500mm' },
-  { label: 'Landschappen',     detail: 'Normandië, Luxemburg (Clervaux) & Nederland' },
-  { label: 'Stadsfotografie',  detail: 'Rotterdam, Gouda & Dordrecht' },
+  { label: 'Wildlife', detail: 'Vogels, Plassen & Ierland' },
+  { label: 'Stadsfotografie', detail: 'Rotterdam, Gouda & Gent' },
 ]
 
 export default function OverMijPage() {
   return (
     <>
       {/* Page header */}
-      <div className="px-6 pb-12 pt-36 text-center">
-        <p className="mb-2 font-lato text-[10px] tracking-[0.35em] uppercase text-mist">Wie ben ik</p>
-        <h1 className="font-montserrat text-4xl font-light text-ink md:text-5xl">Over mij</h1>
+      <div className="px-6 pb-8 pt-28 text-center md:pt-32">
+        <h1 className="font-montserrat text-[2.7rem] font-light leading-none tracking-[-0.06em] text-ink md:text-[4.4rem]">Over mij</h1>
       </div>
 
       {/* Bio block */}
       <section className="px-6 pb-20">
         <div className="mx-auto grid max-w-5xl gap-14 lg:grid-cols-[1fr_1.6fr] lg:items-start">
           {/* Portrait placeholder */}
-          <div className="relative aspect-[3/4] w-full max-w-sm overflow-hidden bg-paper lg:max-w-none">
+          <div className="relative aspect-[4/5] w-full max-w-[28rem] overflow-hidden bg-paper lg:max-w-[32rem]">
             <Image
-              src="https://picsum.photos/seed/frank-portrait-gouda/600/800"
+              src="/images/herfst1.jpg"
               alt="Frank — hobbyfotograaf Gouda"
               fill
-              className="object-cover"
+              className="object-cover object-center"
               unoptimized
             />
           </div>
 
           {/* Bio text */}
-          <div className="flex flex-col justify-center gap-6">
-            <h2 className="font-montserrat text-2xl font-light text-ink">Frank</h2>
-            <p className="font-lato text-sm leading-loose text-mist">
-              Ik ben Frank, hobbyfotograaf uit Gouda. Ik werk met Nikon D850/D810 en een
-              500mm lens voor wildlife, en reis graag door Frankrijk, Luxemburg en Nederland
-              om landschappen vast te leggen. Mijn stijl is rustig, technisch en gericht op
-              detail.
+          <div className="flex flex-col justify-center gap-5">
+            <h2 className="font-montserrat text-[3.2rem] font-light leading-none tracking-[-0.06em] text-ink md:text-[4.8rem]"> </h2>
+            <p className="font-lato text-[0.95rem] leading-8 text-mist">
+              Ik ben Frank, hobbyfotograaf uit Gouda. Ik werk voornamelijk met een Nikon D850
+              en D810 en houd van het vastleggen van landschappen, natuur en bijzondere momenten
+              in het licht. Mijn stijl is rustig, technisch en gericht op detail.
             </p>
-            <p className="font-lato text-sm leading-loose text-mist">
-              Fotografie begon als manier om de wereld te vertragen. Het dwingt mij om stil
-              te staan bij het licht, de compositie en het moment. Of ik nu wacht op een
-              IJsvogel langs de rivier of in het donker voor zonsopkomst klaarstaa bij de
-              Étretat-kliffen — het gaat altijd om aandacht.
+            <p className="font-lato text-[0.95rem] leading-8 text-mist">
+              Wat begon als het maken van eenvoudige vakantiekiekjes, groeide uit tot een echte
+              passie. Fotografie dwingt mij om stil te staan bij licht, compositie en timing. Of
+              ik nu wacht op het juiste moment op de Waddeneilanden of al voor zonsopgang klaarsta
+              bij een klif langs de kust, het draait altijd om aandacht, geduld en het gevoel van
+              het moment.
             </p>
-            <p className="font-lato text-sm leading-loose text-mist">
-              Ik ben geen professional. Ik maak foto&apos;s omdat het me vreugde geeft.
+            <p className="font-lato text-[0.95rem] leading-8 text-mist">
+              Ik ben geen professional, en dat is ook niet de bedoeling. Ik maak foto&apos;s omdat het
+              mij rust geeft, me uitdraagt en vooral veel plezier oplevert. Via deze website deel ik
+              een selectie van beelden die voor mij betekenis hebben.
             </p>
 
             {/* What I photograph */}
-            <div className="mt-2 space-y-3 border-t border-rule pt-6">
+            <div className="mt-1 border-t border-rule pt-6">
               {CATEGORIES.map(c => (
-                <div key={c.label} className="flex items-baseline gap-4">
-                  <span className="w-28 shrink-0 font-lato text-[10px] tracking-[0.2em] uppercase text-mist">
+                <div
+                  key={c.label}
+                  className="grid grid-cols-[160px_minmax(0,1fr)] items-center gap-8 py-3 md:gap-10"
+                >
+                  <span className="font-lato text-[10px] tracking-[0.28em] uppercase text-mist md:text-[11px]">
                     {c.label}
                   </span>
-                  <span className="font-lato text-sm text-ink/70">{c.detail}</span>
+                  <span className="font-montserrat text-[1.1rem] font-light leading-snug tracking-[-0.04em] text-ink md:text-[1.35rem]">
+                    {c.detail}
+                  </span>
                 </div>
               ))}
             </div>
@@ -80,13 +85,13 @@ export default function OverMijPage() {
       </section>
 
       {/* Gear section */}
-      <section className="bg-paper px-6 py-20">
+      <section className="bg-paper px-6 py-14 md:py-16">
         <div className="mx-auto max-w-5xl">
-          <div className="mb-12 text-center">
-            <p className="mb-2 font-lato text-[10px] tracking-[0.35em] uppercase text-mist">
+          <div className="mb-8 text-center md:mb-10">
+            <p className="mb-2 font-lato text-[9px] tracking-[0.28em] uppercase text-mist md:text-[10px]">
               Uitrusting
             </p>
-            <h2 className="font-montserrat text-3xl font-light text-ink">Gear</h2>
+            <h2 className="font-montserrat text-[2rem] font-light leading-none tracking-[-0.06em] text-ink md:text-[2.6rem]">Gear</h2>
           </div>
 
           <div className="grid grid-cols-1 gap-px sm:grid-cols-2 lg:grid-cols-3">
@@ -111,19 +116,19 @@ export default function OverMijPage() {
       {/* Locations strip */}
       <section className="px-6 py-16">
         <div className="mx-auto max-w-5xl">
-          <div className="mb-10 text-center">
-            <p className="mb-2 font-lato text-[10px] tracking-[0.35em] uppercase text-mist">
+          <div className="mb-8 text-center">
+            <p className="mb-2 font-lato text-[10px] tracking-[0.32em] uppercase text-mist">
               Locaties
             </p>
-            <h2 className="font-montserrat text-2xl font-light text-ink">
+            <h2 className="font-montserrat text-[2.3rem] font-light leading-none tracking-[-0.05em] text-ink md:text-[3.2rem]">
               Waar ik fotografeer
             </h2>
           </div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
             {[
-              { region: 'Normandië', desc: 'Kliffen bij Étretat, binnenlanden, kust in ochtendmist' },
-              { region: 'Luxemburg', desc: 'Clervaux-regio, Ardennen, herfstbossen' },
-              { region: 'Nederland', desc: 'Gouda, Rotterdam, Dordrecht, polders & waterlinies' },
+              { region: 'Ierland', desc: 'Kliffen bij Moher, binnenlanden, kust in ochtendmist' },
+              { region: 'Veluwe', desc: ' Herfstbossen' },
+              { region: 'Nederland', desc: 'Gouda, Rotterdam, polders & waterlinies' },
             ].map(loc => (
               <div key={loc.region} className="border-t border-rule pt-5">
                 <h3 className="mb-1 font-montserrat text-lg font-light text-ink">

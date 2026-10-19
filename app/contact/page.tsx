@@ -53,7 +53,7 @@ export default function ContactPage() {
             <div className="border-t border-rule pt-6">
               <p className="font-lato text-xs leading-relaxed text-mist">
                 Ik reageer meestal binnen een paar dagen. Ik ben een hobbyfotograaf en
-                beschikbaar voor vragen, niet voor commerciële opdrachten.
+                beschikbaar voor vragen.
               </p>
             </div>
           </aside>
