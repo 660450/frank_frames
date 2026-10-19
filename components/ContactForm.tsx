@@ -1,19 +1,54 @@
 'use client'
 
-import { useState, type FormEvent } from 'react'
+import { useState, type ChangeEvent, type FormEvent } from 'react'
 
 type Status = 'idle' | 'sending' | 'sent' | 'error'
 
+type FormValues = {
+  naam: string
+  email: string
+  bericht: string
+}
+
+const initialValues: FormValues = {
+  naam: '',
+  email: '',
+  bericht: '',
+}
+
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>('idle')
+  const [values, setValues] = useState<FormValues>(initialValues)
+
+  function handleChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    const { name, value } = event.target
+    setValues(current => ({ ...current, [name]: value }))
+  }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setStatus('sending')
 
-    // Simulated send — replace with Formspree, Resend, or a Next.js API route
-    await new Promise(r => setTimeout(r, 1200))
-    setStatus('sent')
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      })
+
+      if (!response.ok) {
+        const payload = await response.json().catch(() => ({}))
+        throw new Error(payload.error || 'Er ging iets mis bij het verzenden.')
+      }
+
+      setValues(initialValues)
+      setStatus('sent')
+    } catch (error) {
+      console.error(error)
+      setStatus('error')
+    }
   }
 
   if (status === 'sent') {
@@ -52,7 +87,6 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-6">
-      {/* Name */}
       <div className="flex flex-col gap-2">
         <label
           htmlFor="naam"
@@ -66,12 +100,13 @@ export default function ContactForm() {
           type="text"
           required
           autoComplete="name"
+          value={values.naam}
+          onChange={handleChange}
           className="border-b border-rule bg-transparent py-2 font-lato text-sm text-ink placeholder:text-mist/50 outline-none transition-colors focus:border-ink"
           placeholder="Jouw naam"
         />
       </div>
 
-      {/* Email */}
       <div className="flex flex-col gap-2">
         <label
           htmlFor="email"
@@ -85,12 +120,13 @@ export default function ContactForm() {
           type="email"
           required
           autoComplete="email"
+          value={values.email}
+          onChange={handleChange}
           className="border-b border-rule bg-transparent py-2 font-lato text-sm text-ink placeholder:text-mist/50 outline-none transition-colors focus:border-ink"
           placeholder="jouw@email.nl"
         />
       </div>
 
-      {/* Message */}
       <div className="flex flex-col gap-2">
         <label
           htmlFor="bericht"
@@ -103,12 +139,13 @@ export default function ContactForm() {
           name="bericht"
           required
           rows={5}
+          value={values.bericht}
+          onChange={handleChange}
           className="resize-none border-b border-rule bg-transparent py-2 font-lato text-sm text-ink placeholder:text-mist/50 outline-none transition-colors focus:border-ink"
           placeholder="Schrijf hier je bericht..."
         />
       </div>
 
-      {/* Submit */}
       <button
         type="submit"
         disabled={status === 'sending'}
@@ -119,7 +156,7 @@ export default function ContactForm() {
 
       {status === 'error' && (
         <p className="font-lato text-xs text-red-500">
-          Er is iets misgegaan. Probeer het opnieuw.
+          Er is iets misgegaan. Controleer je invoer en probeer het opnieuw.
         </p>
       )}
     </form>
