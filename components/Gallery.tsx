@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import Lightbox from './Lightbox'
 import type { Photo, Category } from '@/lib/data'
+import type { Locale } from '@/lib/i18n'
 
 interface GalleryProps {
   photos: Photo[]
@@ -13,21 +14,31 @@ interface GalleryProps {
   categories?: Category[]
   /** Number of columns — 2 or 3 */
   columns?: 2 | 3
+  locale?: Locale
 }
-
-const ALL = 'Alles'
 
 export default function Gallery({
   photos,
   showFilter = false,
   categories = [],
   columns = 3,
+  locale = 'nl',
 }: GalleryProps) {
-  const [active, setActive]             = useState<string>(ALL)
+  const isEnglish = locale === 'en'
+  const allLabel = isEnglish ? 'All' : 'Alles'
+  const [active, setActive]             = useState<string>(allLabel)
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
-  const tabs = [ALL, ...categories]
-  const visible = active === ALL ? photos : photos.filter(p => p.category === active)
+  const tabs = [
+    { value: allLabel, label: allLabel },
+    ...categories.map(category => ({
+      value: category,
+      label: isEnglish && category === 'Landschappen' ? 'Landscapes'
+        : isEnglish && category === 'Stadsfotografie' ? 'Urban photography'
+          : isEnglish && category === 'Kanoën' ? 'Canoeing' : category,
+    })),
+  ]
+  const visible = active === allLabel ? photos : photos.filter(p => p.category === active)
 
   const gridCols =
     columns === 2
@@ -41,15 +52,15 @@ export default function Gallery({
         <div className="mb-12 flex flex-wrap justify-center gap-x-8 gap-y-3">
           {tabs.map(tab => (
             <button
-              key={tab}
-              onClick={() => setActive(tab)}
+              key={tab.value}
+              onClick={() => setActive(tab.value)}
               className={`font-lato text-[11px] tracking-[0.2em] uppercase pb-1 transition-all duration-200 border-b ${
-                active === tab
+                active === tab.value
                   ? 'border-ink text-ink'
                   : 'border-transparent text-mist hover:text-ink'
               }`}
             >
-              {tab}
+              {tab.label}
             </button>
           ))}
         </div>
@@ -72,7 +83,7 @@ export default function Gallery({
             <button
               key={photo.id}
               onClick={() => setLightboxIndex(i)}
-              aria-label={`Foto openen: ${photo.alt}`}
+              aria-label={isEnglish ? `Open photo: ${photo.alt}` : `Foto openen: ${photo.alt}`}
               className={`group relative col-span-12 overflow-hidden bg-paper ${spanClass} ${aspectClass}`}
               onContextMenu={e => e.preventDefault()}
               draggable={false}
@@ -106,6 +117,7 @@ export default function Gallery({
           photos={visible}
           initialIndex={lightboxIndex}
           onClose={() => setLightboxIndex(null)}
+          locale={locale}
         />
       )}
     </>
