@@ -145,27 +145,19 @@ Bij externe hosting: voeg het domein toe aan `remotePatterns` in `next.config.js
 
 ## Deployment
 
-Voor GitHub Pages moet de app als statische export worden gebouwd:
+Voor een werkende contactformulier-API is een server-runtime nodig. Daarom is de app nu geconfigureerd voor **Next.js in normale servermodus** (geen `output: 'export'`).
 
-```bash
-npm run build
-```
-
-De app exporteert dan een `out/`-map die je rechtstreeks kunt deployen via GitHub Pages.
-
-Bij een repository met naam `frank-fotosite` wordt de site beschikbaar op:
-
-```text
-https://<jouw-github-gebruikersnaam>.github.io/frank-fotosite/
-```
-
-Voor een custom domain of een gebruikerssite zonder repo-naam kun je `basePath` en `assetPrefix` in `next.config.js` verwijderen.
-
-Of deploy direct naar **Vercel**:
+### Aanbevolen: deploy naar Vercel
 
 ```bash
 npx vercel
 ```
+
+Vercel ondersteunt de Next.js API-routes uit `app/api/contact/route.ts` zonder extra serverconfiguratie.
+
+### Als je toch een statische export wilt gebruiken
+
+Dat werkt alleen als je de contactformulier-API vervangt door een externe dienst zoals Formspree, EmailJS of een `mailto:`-link. Een `app/api/contact/route.ts` route kan niet werken op een pure GitHub Pages static export.
 
 ---
 
