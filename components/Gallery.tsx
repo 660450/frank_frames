@@ -88,19 +88,21 @@ export default function Gallery({
               onContextMenu={e => e.preventDefault()}
               draggable={false}
             >
-              <Image
-                src={photo.src}
-                alt={photo.alt}
-                fill
-                className={`h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.04] select-none ${
-                  isPortrait ? 'object-contain scale-[0.96]' : 'object-cover'
-                }`}
-                style={isPortrait ? { objectPosition: 'center center' } : undefined}
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                unoptimized
-                draggable={false}
-                onContextMenu={e => e.preventDefault()}
-              />
+              <div className={`h-full w-full ${isPortrait ? 'translate-x-[4%]' : ''}`}>
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  className={`h-full w-full transition-transform duration-700 ease-out group-hover:scale-[1.04] select-none ${
+                    isPortrait ? 'object-contain scale-[0.96]' : 'object-cover'
+                  }`}
+                  style={isPortrait ? { objectPosition: 'center center' } : undefined}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  unoptimized
+                  draggable={false}
+                  onContextMenu={e => e.preventDefault()}
+                />
+              </div>
               {/* Hover vignette */}
               <div className="absolute inset-0 bg-black/0 transition-all duration-300 group-hover:bg-black/10" />
               <div className="pointer-events-none absolute bottom-3 right-3 rounded-full border border-white/20 bg-black/20 px-2 py-1 font-lato text-[8px] uppercase tracking-[0.22em] text-white/70 backdrop-blur-[1px] shadow-[0_1px_8px_rgba(0,0,0,0.15)]">

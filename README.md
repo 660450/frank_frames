@@ -171,12 +171,15 @@ npx vercel
 
 ## Contactformulier activeren
 
-Het formulier in `app/contact/page.tsx` simuleert nu een verzending.  
-Vervang de `setTimeout` mock door een echte API-call:
+Voor het echte verzenden van e-mails configureer je in `.env.local`:
 
-- **Formspree**: `fetch('https://formspree.io/f/JOUW_ID', { method: 'POST', body: formData })`
-- **Resend**: server action met `resend.emails.send(...)`
-- **Vercel**: gebruik een API route in `app/api/contact/route.ts`
+```env
+RESEND_API_KEY=re_xxxxxxxxxxxxxxxxx
+CONTACT_TO_EMAIL=frank.frames@outlook.com
+RESEND_FROM_EMAIL="Frank Fotografie <mail@jouwdomein.nl>"
+```
+
+Belangrijk: `RESEND_FROM_EMAIL` moet een geverifieerd Resend-adres zijn. De standaard `onboarding@resend.dev` werkt alleen in de Resend sandbox en is niet geschikt voor productie.
 
 ---
 
