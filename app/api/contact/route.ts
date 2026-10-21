@@ -11,6 +11,16 @@ function getResendClient() {
   return new Resend(apiKey)
 }
 
+function getFromAddress() {
+  const from = process.env.RESEND_FROM_EMAIL
+
+  if (!from) {
+    throw new Error('RESEND_FROM_EMAIL ontbreekt. Zet een geverifieerd verzendadres in .env.local, bijvoorbeeld: "Frank Fotografie <mail@jouwdomein.nl>".')
+  }
+
+  return from
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json()
@@ -25,11 +35,16 @@ export async function POST(request: Request) {
       )
     }
 
-    const recipient = process.env.CONTACT_TO_EMAIL || 'frank@example.com'
+    const recipient = process.env.CONTACT_TO_EMAIL
+    if (!recipient) {
+      throw new Error('CONTACT_TO_EMAIL ontbreekt. Voeg het ontvangende e-mailadres toe aan .env.local.')
+    }
+
     const resend = getResendClient()
+    const from = getFromAddress()
 
     const result = await resend.emails.send({
-      from: 'Frank Fotografie <onboarding@resend.dev>',
+      from,
       to: [recipient],
       replyTo: email,
       subject: `Nieuw contactbericht van ${naam}`,

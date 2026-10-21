@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, type ChangeEvent, type FormEvent } from 'react'
+import type { Locale } from '@/lib/i18n'
 
 type Status = 'idle' | 'sending' | 'sent' | 'error'
 
@@ -16,7 +17,8 @@ const initialValues: FormValues = {
   bericht: '',
 }
 
-export default function ContactForm() {
+export default function ContactForm({ locale = 'nl' }: { locale?: Locale }) {
+  const isEnglish = locale === 'en'
   const [status, setStatus] = useState<Status>('idle')
   const [values, setValues] = useState<FormValues>(initialValues)
 
@@ -71,15 +73,15 @@ export default function ContactForm() {
             strokeLinejoin="round"
           />
         </svg>
-        <h2 className="font-montserrat text-2xl font-light text-ink">Bericht ontvangen</h2>
+        <h2 className="font-montserrat text-2xl font-light text-ink">{isEnglish ? 'Message received' : 'Bericht ontvangen'}</h2>
         <p className="mt-3 font-lato text-sm text-mist">
-          Bedankt — ik neem zo snel mogelijk contact op.
+        {isEnglish ? 'Thank you — I’ll be in touch as soon as possible.' : 'Bedankt — ik neem zo snel mogelijk contact op.'}
         </p>
         <button
           onClick={() => setStatus('idle')}
           className="mt-8 font-lato text-[10px] tracking-[0.25em] uppercase text-accent transition-colors hover:text-ink"
         >
-          Nog een bericht sturen
+          {isEnglish ? 'Send another message' : 'Nog een bericht sturen'}
         </button>
       </div>
     )
@@ -92,7 +94,7 @@ export default function ContactForm() {
           htmlFor="naam"
           className="font-lato text-[10px] tracking-[0.25em] uppercase text-mist"
         >
-          Naam
+          {isEnglish ? 'Name' : 'Naam'}
         </label>
         <input
           id="naam"
@@ -103,7 +105,7 @@ export default function ContactForm() {
           value={values.naam}
           onChange={handleChange}
           className="border-b border-rule bg-transparent py-2 font-lato text-sm text-ink placeholder:text-mist/50 outline-none transition-colors focus:border-ink"
-          placeholder="Jouw naam"
+          placeholder={isEnglish ? 'Your name' : 'Jouw naam'}
         />
       </div>
 
@@ -112,7 +114,7 @@ export default function ContactForm() {
           htmlFor="email"
           className="font-lato text-[10px] tracking-[0.25em] uppercase text-mist"
         >
-          E-mail
+          {isEnglish ? 'Email' : 'E-mail'}
         </label>
         <input
           id="email"
@@ -123,7 +125,7 @@ export default function ContactForm() {
           value={values.email}
           onChange={handleChange}
           className="border-b border-rule bg-transparent py-2 font-lato text-sm text-ink placeholder:text-mist/50 outline-none transition-colors focus:border-ink"
-          placeholder="jouw@email.nl"
+          placeholder={isEnglish ? 'you@email.com' : 'jouw@email.nl'}
         />
       </div>
 
@@ -132,7 +134,7 @@ export default function ContactForm() {
           htmlFor="bericht"
           className="font-lato text-[10px] tracking-[0.25em] uppercase text-mist"
         >
-          Bericht
+          {isEnglish ? 'Message' : 'Bericht'}
         </label>
         <textarea
           id="bericht"
@@ -142,7 +144,7 @@ export default function ContactForm() {
           value={values.bericht}
           onChange={handleChange}
           className="resize-none border-b border-rule bg-transparent py-2 font-lato text-sm text-ink placeholder:text-mist/50 outline-none transition-colors focus:border-ink"
-          placeholder="Schrijf hier je bericht..."
+          placeholder={isEnglish ? 'Write your message here...' : 'Schrijf hier je bericht...'}
         />
       </div>
 
@@ -151,12 +153,16 @@ export default function ContactForm() {
         disabled={status === 'sending'}
         className="self-start border border-ink px-10 py-3 font-lato text-[10px] tracking-[0.3em] uppercase text-ink transition-all duration-300 hover:bg-ink hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
       >
-        {status === 'sending' ? 'Verzenden…' : 'Versturen'}
+        {status === 'sending'
+          ? isEnglish ? 'Sending…' : 'Verzenden…'
+          : isEnglish ? 'Send message' : 'Versturen'}
       </button>
 
       {status === 'error' && (
         <p className="font-lato text-xs text-red-500">
-          Er is iets misgegaan. Controleer je invoer en probeer het opnieuw.
+          {isEnglish
+            ? 'Something went wrong. Please check your details and try again.'
+            : 'Er is iets misgegaan. Controleer je invoer en probeer het opnieuw.'}
         </p>
       )}
     </form>

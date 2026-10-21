@@ -1,14 +1,20 @@
-import Link from 'next/link'
+'use client'
 
-const LINKS = [
-  { href: '/portfolio',  label: 'Portfolio'  },
-  { href: '/projecten',  label: 'Projecten'  },
-  { href: '/over-mij',   label: 'Over mij'   },
-  { href: '/contact',    label: 'Contact'    },
-]
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { messages } from '@/lib/i18n'
 
 export default function Footer() {
   const year = new Date().getFullYear()
+  const pathname = usePathname()
+  const isEnglish = pathname === '/en' || pathname.startsWith('/en/')
+  const t = messages[isEnglish ? 'en' : 'nl']
+  const links = [
+    { href: isEnglish ? '/en/portfolio' : '/portfolio', label: t.nav.portfolio },
+    { href: isEnglish ? '/en/projects' : '/projecten', label: t.nav.projects },
+    { href: isEnglish ? '/en/about' : '/over-mij', label: t.nav.about },
+    { href: isEnglish ? '/en/contact' : '/contact', label: t.nav.contact },
+  ]
 
   return (
     <footer className="border-t border-rule bg-white">
@@ -20,13 +26,13 @@ export default function Footer() {
               Frank
             </p>
             <p className="mt-1 font-lato text-xs text-mist">
-              Fotografie vanuit Gouda, Nederland
+              {isEnglish ? 'Photography from Gouda, the Netherlands' : 'Fotografie vanuit Gouda, Nederland'}
             </p>
           </div>
 
           {/* Nav */}
-          <nav className="flex flex-wrap justify-center gap-x-8 gap-y-2" aria-label="Footer navigatie">
-            {LINKS.map(({ href, label }) => (
+          <nav className="flex flex-wrap justify-center gap-x-8 gap-y-2" aria-label={t.nav.footer}>
+            {links.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
@@ -58,7 +64,7 @@ export default function Footer() {
         {/* Copyright */}
         <div className="mt-10 border-t border-rule pt-6 text-center">
           <p className="font-lato text-[10px] tracking-wider text-mist/60 uppercase">
-            © {year} Frank Fotografie · Alle rechten voorbehouden
+            © {year} Frank Fotografie · {t.allRightsReserved}
           </p>
         </div>
       </div>
