@@ -59,15 +59,16 @@ export async function POST(request: Request) {
     })
 
     if (result.error) {
-      throw new Error(result.error.message || 'Resend kon het bericht niet verzenden.')
+      console.error('Resend email delivery failed:', result.error)
+      throw new Error('EMAIL_SEND_FAILED')
     }
 
     return NextResponse.json({ success: true })
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'Onbekende fout'
+    console.error('Contact form submission failed:', error)
 
     return NextResponse.json(
-      { error: message },
+      { error: 'Er ging iets mis bij het verzenden van je bericht. Probeer het later opnieuw.' },
       { status: 500 }
     )
   }
