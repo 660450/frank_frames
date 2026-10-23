@@ -26,7 +26,9 @@ export default function ContactForm({ locale = 'nl' }: { locale?: Locale }) {
   function handleChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const { name, value } = event.target
     setValues(current => ({ ...current, [name]: value }))
-    if (status === 'error') {
+
+    if (status === 'error' || status === 'sent') {
+      setStatus('idle')
       setErrorMessage('')
     }
   }
