@@ -33,8 +33,19 @@ export default function ContactForm({ locale = 'nl' }: { locale?: Locale }) {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    setStatus('sending')
     setErrorMessage('')
+
+    const emailIsValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)
+
+    if (!emailIsValid) {
+      setErrorMessage(
+        isEnglish ? 'Please enter a valid email address.' : 'Voer een geldig e-mailadres in.'
+      )
+      setStatus('error')
+      return
+    }
+
+    setStatus('sending')
 
     try {
       const response = await fetch('/api/contact', {
