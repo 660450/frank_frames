@@ -45,10 +45,10 @@ export default function Footer() {
 
           {/* Instagram */}
           <a
-            href="https://instagram.com"
+            href="https://www.instagram.com/frank.frames2026"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Instagram"
+            aria-label="Instagram frank.frames2026"
             className="flex items-center gap-2 font-lato text-[11px] tracking-[0.2em] uppercase text-mist transition-colors hover:text-ink"
           >
             {/* Instagram icon */}
