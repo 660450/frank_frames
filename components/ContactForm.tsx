@@ -46,14 +46,22 @@ export default function ContactForm({ locale = 'nl' }: { locale?: Locale }) {
       })
 
       if (!response.ok) {
-        throw new Error(isEnglish ? 'Something went wrong while sending your message.' : 'Er ging iets mis bij het verzenden van je bericht.')
+        throw new Error(
+          isEnglish
+            ? 'Something went wrong while sending your message.'
+            : 'Er ging iets mis bij het verzenden van je bericht.'
+        )
       }
 
       setValues(initialValues)
       setStatus('sent')
     } catch (error) {
       console.error(error)
-      setErrorMessage(isEnglish ? 'Something went wrong while sending your message.' : 'Er ging iets mis bij het verzenden van je bericht.')
+      setErrorMessage(
+        isEnglish
+          ? 'Something went wrong while sending your message.'
+          : 'Er ging iets mis bij het verzenden van je bericht.'
+      )
       setStatus('error')
     }
   }
@@ -81,7 +89,9 @@ export default function ContactForm({ locale = 'nl' }: { locale?: Locale }) {
             strokeLinejoin="round"
           />
         </svg>
-        <h2 className="font-montserrat text-2xl font-light text-ink">{isEnglish ? 'Message received' : 'Bericht ontvangen'}</h2>
+        <h2 className="font-montserrat text-2xl font-light text-ink">
+          {isEnglish ? 'Message received' : 'Bericht ontvangen'}
+        </h2>
         <p className="mt-3 max-w-md font-lato text-sm leading-relaxed text-mist">
           {isEnglish
             ? 'Thank you — your message is in my inbox and I’ll reply as soon as possible.'
