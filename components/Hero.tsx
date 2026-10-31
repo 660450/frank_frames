@@ -1,10 +1,13 @@
+'use client'
+
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
 interface HeroProps {
-  /** Absolute URL or path to the background image */
-  imageSrc: string
-  imageAlt: string
+  /** Absolute URL or path to the background image or multiple images for a slideshow */
+  imageSrc: string | string[]
+  imageAlt: string | string[]
   /** Main headline */
   title: string
   /** Small label above the headline */
@@ -15,6 +18,8 @@ interface HeroProps {
   fullscreen?: boolean
   /** Overlay darkness 0–100 */
   overlay?: number
+  /** Delay in ms between slideshow images */
+  slideInterval?: number
 }
 
 export default function Hero({
@@ -25,22 +30,41 @@ export default function Hero({
   cta,
   fullscreen = true,
   overlay = 42,
+  slideInterval = 5000,
 }: HeroProps) {
+  const sources = Array.isArray(imageSrc) ? imageSrc : [imageSrc]
+  const alts = Array.isArray(imageAlt) ? imageAlt : [imageAlt]
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  useEffect(() => {
+    if (sources.length < 2) return
+
+    const intervalId = window.setInterval(() => {
+      setActiveIndex(current => (current + 1) % sources.length)
+    }, slideInterval)
+
+    return () => window.clearInterval(intervalId)
+  }, [slideInterval, sources.length])
+
   return (
     <section
       className={`relative isolate overflow-hidden ${fullscreen ? 'h-screen' : 'h-[58vh] min-h-[380px]'}`}
     >
-      {/* Background photo */}
-      <Image
-        src={imageSrc}
-        alt={imageAlt}
-        fill
-        priority
-        className="scale-[0.96] object-cover"
-        style={{ objectPosition: '50% 50%' }}
-        sizes="100vw"
-        unoptimized
-      />
+      {sources.map((src, index) => (
+        <Image
+          key={`${src}-${index}`}
+          src={src}
+          alt={alts[index] ?? alts[0] ?? title}
+          fill
+          priority={index === 0}
+          className={`scale-[0.96] object-cover transition-opacity duration-1000 ease-out ${
+            index === activeIndex ? 'opacity-100' : 'opacity-0'
+          }`}
+          style={{ objectPosition: '50% 50%' }}
+          sizes="100vw"
+          unoptimized
+        />
+      ))}
 
       {/* Gradient overlay */}
       <div
@@ -69,6 +93,20 @@ export default function Hero({
           </Link>
         )}
       </div>
+
+      {sources.length > 1 && (
+        <div className="absolute bottom-16 left-1/2 flex -translate-x-1/2 items-center gap-2">
+          {sources.map((_, index) => (
+            <span
+              key={`dot-${index}`}
+              className={`h-2 w-2 rounded-full transition-all duration-300 ${
+                index === activeIndex ? 'bg-white' : 'bg-white/40'
+              }`}
+              aria-hidden="true"
+            />
+          ))}
+        </div>
+      )}
 
       {/* Scroll indicator — only on fullscreen */}
       {fullscreen && (

@@ -180,4 +180,20 @@ export const projects: Project[] = projectGroups.map(group => {
   }
 })
 
+const listHeroPhotos = (): string[] => {
+  const heroDir = path.join(process.cwd(), 'public', 'images', 'hero')
+
+  if (!fs.existsSync(heroDir)) {
+    return ['/images/index-hero.jpg', '/images/herfst1.jpg', '/images/herfst2.jpg']
+  }
+
+  const files = fs
+    .readdirSync(heroDir)
+    .filter(file => /\.(jpe?g|png|webp|avif|gif)$/i.test(file))
+    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }))
+
+  return files.map(file => `/images/hero/${encodeURIComponent(file)}`)
+}
+
+export const heroSlides = listHeroPhotos()
 export const featuredPhotos = portfolioPhotos.slice(0, 6)

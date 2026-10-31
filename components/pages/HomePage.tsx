@@ -1,23 +1,30 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import Hero from '@/components/Hero'
-import { featuredPhotos, projects } from '@/lib/data'
+import { featuredPhotos, heroSlides, projects } from '@/lib/data'
 import { localizedPhotoAlt, localizedProject, type Locale } from '@/lib/i18n'
 
 export default function HomeContent({ locale = 'nl' }: { locale?: Locale }) {
   const isEnglish = locale === 'en'
 
+  const heroAlts = heroSlides.map((_, index) =>
+    isEnglish
+      ? `Frank photography hero image ${index + 1}`
+      : `Frank fotografie startafbeelding ${index + 1}`
+  )
+
   return (
     <>
       {/* ── Hero ──────────────────────────────────────────────── */}
       <Hero
-        imageSrc="/images/index-hero.jpg"
-        imageAlt={isEnglish ? 'Landscape photograph by Frank, an amateur photographer from Gouda' : 'Landschapsfoto door Frank — hobbyfotograaf uit Gouda'}
+        imageSrc={heroSlides}
+        imageAlt={heroAlts}
         eyebrow={isEnglish ? 'Frank · Gouda, the Netherlands' : 'Frank · Gouda, Nederland'}
         title={isEnglish ? 'Photography with an eye for detail' : 'Fotografie met aandacht voor detail'}
         cta={{ label: isEnglish ? 'Explore portfolio' : 'Bekijk portfolio', href: isEnglish ? '/en/portfolio' : '/portfolio' }}
         fullscreen
         overlay={45}
+        slideInterval={5000}
       />
 
       {/* ── Featured grid ─────────────────────────────────────── */}
