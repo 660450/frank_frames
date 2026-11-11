@@ -36,6 +36,22 @@ const projectTitleMap: Record<string, Partial<Project>> = {
       'Aan het einde van de dag, wanneer de zon ondergaat, lijkt alles op het water langzamer te gaan. De kano glijdt geruisloos over het oppervlak, terwijl het laatste zonlicht zacht over het water valt. Even lijkt de wereld stil te staan. In deze serie zoek ik die combinatie van rust en beweging: het ritme van het water, de weerspiegelingen en de sfeer van een stille rivier of plas in de avondschemering.',
     location: 'Gouda, Nederland',
   },
+  herfst: {
+    title: 'Herfst in het Speulderbos',
+    description: 'Een verstilde herfstserie uit het Speulderbos, vol zacht licht, kleur en ritme.',
+    intro:
+      'In de herfst verandert het bos voortdurend. Het licht valt laag tussen de bomen, bladeren kleuren op en iedere bocht laat een nieuw patroon zien. In het Speulderbos heb ik gezocht naar die stille momenten waarop het landschap bijna abstract wordt: een samenspel van stammen, bladeren en licht.',
+    date: '2026',
+    location: 'Speulderbos, Nederland',
+  },
+  zonneharpen: {
+    title: 'Zonneharpen in het Speulderbos',
+    description: 'Lichtbundels tussen de bomen in het Speulderbos: een serie over sfeer, stilte en ochtendlicht.',
+    intro:
+      'Wanneer de zon laag staat, vallen er lange lichtbundels tussen de bomen. Deze zonneharpen maken het bos tijdelijk bijna tastbaar: het licht tekent lijnen door de mist en geeft de stammen een eigen ritme. In deze serie draait het om dat vluchtige moment waarop het Speulderbos verandert in een decor van licht en schaduw.',
+    date: '2026',
+    location: 'Speulderbos, Nederland',
+  },
   food: {
     title: 'Food & Gastronomie',
     description: 'Eten, texturen en detail in een warme, tastbare sfeer.',
@@ -196,4 +212,6 @@ const listHeroPhotos = (): string[] => {
 }
 
 export const heroSlides = listHeroPhotos()
-export const featuredPhotos = portfolioPhotos.slice(0, 6)
+export const featuredPhotos = portfolioGroups
+  .map(group => group.photos[0])
+  .filter((photo): photo is Photo => Boolean(photo))
