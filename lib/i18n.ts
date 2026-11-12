@@ -32,6 +32,13 @@ const projectTranslations: Record<string, Partial<Project>> = {
     date: '2025',
     location: 'The Netherlands',
   },
+  herfst: {
+    title: 'Autumn on the Veluwe',
+    description: 'A quiet autumn series from the Veluwe, with images from the Speulderbos and along the Leuvenumse Beek.',
+    intro:
+      'In autumn, the landscape is constantly changing. Low light falls between the trees, leaves take on new colours and fresh patterns appear along the water. On the Veluwe, in the Speulderbos and along the Leuvenumse Beek, I looked for those quiet moments when forest and stream become almost abstract: an interplay of trunks, leaves, light and flowing water.',
+    location: 'Veluwe, the Netherlands',
+  },
 }
 
 export function localizedPortfolioTitle(slug: string, title: string, locale: Locale) {

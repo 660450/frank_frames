@@ -37,12 +37,12 @@ const projectTitleMap: Record<string, Partial<Project>> = {
     location: 'Gouda, Nederland',
   },
   herfst: {
-    title: 'Herfst in het Speulderbos',
-    description: 'Een verstilde herfstserie uit het Speulderbos, vol zacht licht, kleur en ritme.',
+    title: 'Herfst op de Veluwe',
+    description: 'Een verstilde herfstserie van de Veluwe, met beelden uit het Speulderbos en langs de Leuvenumse Beek.',
     intro:
-      'In de herfst verandert het bos voortdurend. Het licht valt laag tussen de bomen, bladeren kleuren op en iedere bocht laat een nieuw patroon zien. In het Speulderbos heb ik gezocht naar die stille momenten waarop het landschap bijna abstract wordt: een samenspel van stammen, bladeren en licht.',
+      'In de herfst verandert het landschap voortdurend. Het licht valt laag tussen de bomen, bladeren kleuren op en langs het water ontstaan steeds nieuwe patronen. Op de Veluwe heb ik in het Speulderbos en bij de Leuvenumse Beek gezocht naar die stille momenten waarop bos en beek bijna abstract worden: een samenspel van stammen, bladeren, licht en stromend water.',
     date: '2026',
-    location: 'Speulderbos, Nederland',
+    location: 'Veluwe, Nederland',
   },
   zonneharpen: {
     title: 'Zonneharpen in het Speulderbos',
